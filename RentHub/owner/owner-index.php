@@ -191,6 +191,7 @@ include("engine.php");
               <select class="form-control" name="country" required="required">
                                 <option value="">--Select Country--</option>
                                 <option value="Nepal">Nepal</option>
+                                <option value="India">India</option>
               </select>
             </div>
             <div class="form-group">
@@ -204,6 +205,7 @@ include("engine.php");
                                 <option value="Province No. 5">Province No. 5</option>
                                 <option value="Karnali Pradesh">Karnali Pradesh</option>
                                 <option value="Sudurpaschim Pradesh">Sudurpaschim Pradesh</option>
+                                <option value="Maharastra">Maharastra</option>
               </select>
             </div>
             <div class="form-group">
@@ -224,6 +226,7 @@ include("engine.php");
                                 <option value="Rapti">Rapti</option>
                                 <option value="Sagarmatha">Sagarmatha</option>
                                 <option value="Seti">Seti</option>
+                                <option value="Bandra">Bandra</option>
                             </select>
             </div>
             <div class="form-group">
@@ -231,6 +234,7 @@ include("engine.php");
               <select class="form-control" name="district" required="required">
                                 %{--Mechi--}%
                                 <option value="">--Select District--</option>
+                                <option value="Mumbai">Mumbai</option>
                                 <option value="Taplejung">Taplejung</option>
                                 <option value="Panchthar">Panchthar</option>
                                 <option value="Ilam">Ilam</option>
@@ -605,6 +609,8 @@ include("engine.php");
               <select class="form-control" name="country" required="required">
                                 <option value="">--Select Country--</option>
                                 <option value="Nepal">Nepal</option>
+                                <option value="India">India</option>
+                                
               </select>
             </div>
             <div class="form-group">
