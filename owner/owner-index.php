@@ -206,12 +206,14 @@ include("engine.php");
                                 <option value="Karnali Pradesh">Karnali Pradesh</option>
                                 <option value="Sudurpaschim Pradesh">Sudurpaschim Pradesh</option>
                                 <option value="Maharastra">Maharastra</option>
+                                <option value="Karnataka">Karnataka</option>
               </select>
             </div>
             <div class="form-group">
               <label for="zone">Zone:</label>
               <select class="form-control" name="zone" required="required">
                                 <option value="">--Select Zone--</option>
+                                <option value="Bijapur">Bijapur</option>
                                 <option value="Bagmati">Bagmati</option>
                                 <option value="Bheri">Bheri</option>
                                 <option value="Dhawalagiri">Dhawalagiri</option>
@@ -234,6 +236,7 @@ include("engine.php");
               <select class="form-control" name="district" required="required">
                                 %{--Mechi--}%
                                 <option value="">--Select District--</option>
+                                <option value="Vijayapur">Vijayapur</option>
                                 <option value="Mumbai">Mumbai</option>
                                 <option value="Taplejung">Taplejung</option>
                                 <option value="Panchthar">Panchthar</option>
