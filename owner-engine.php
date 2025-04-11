@@ -83,7 +83,9 @@ function owner_login(){
 		if($result->num_rows==1){
 			$data = $result-> fetch_assoc();
 			$logged_user = $data['email'];
-			session_start();
+			if (session_status() === PHP_SESSION_NONE) {
+				session_start();
+			  }
 			$_SESSION['email']=$email;
 			header('location:owner/owner-index.php');
     
