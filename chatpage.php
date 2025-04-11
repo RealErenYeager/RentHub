@@ -1,5 +1,8 @@
 <?php 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 isset($_SESSION["email"]);
 include("navbar.php");
 include("config/config.php");
