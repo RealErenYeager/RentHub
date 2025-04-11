@@ -15,11 +15,12 @@ $id_photo='';
 
 $errors=array();
 
-$db = new mysqli('localhost','root','','renthouse');
+$conn = new mysqli("sql312.infinityfree.com", "if0_38686514", "IPP2Lin08rt", "if0_38686514_renthub");
 
-if($db->connect_error){
-	echo "Error connecting database";
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
 
 
 if(isset($_POST['tenant_register'])){
