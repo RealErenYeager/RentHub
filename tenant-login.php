@@ -1,31 +1,35 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
+session_start();
 if(isset($_SESSION["email"])){
   header("location:index.php");
 }
 
 include("navbar.php");
 include("tenant-engine.php");
+?>
 
- ?>
-
-<div class="container">
-  <h3 style="font-weight: bold; text-align: center;">Tenant Login</h3><hr><br><br>
-  <form method="POST">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
-    </div>
-    <div class="form-group">
-      <a href="forgot-password-owner.php">Lost your Password ? </a> 
-    </div>
-    <center><input type="submit" id="submit" name="tenant_login" class="btn btn-primary btn-block" value="Login"></center>
-  </form>
+<!-- Tailwind Login Page -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-100 via-emerald-500 to-blue-50">
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Tenant Login</h2>
+    <form method="POST" class="space-y-4">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div>
+        <label for="pwd" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="pwd" name="password" placeholder="Enter your password" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div class="text-sm text-right">
+        <a href="forgot-password-owner.php" class="text-blue-600 hover:underline">Lost your Password?</a>
+      </div>
+      <button type="submit" name="tenant_login"
+        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+        Login
+      </button>
+    </form>
+  </div>
 </div>

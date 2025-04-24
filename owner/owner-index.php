@@ -1,12 +1,5 @@
 <?php 
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
+session_start();
 if(!isset($_SESSION["email"])){
   header("location:../index.php");
 }
@@ -198,7 +191,6 @@ include("engine.php");
               <select class="form-control" name="country" required="required">
                                 <option value="">--Select Country--</option>
                                 <option value="Nepal">Nepal</option>
-                                <option value="India">India</option>
               </select>
             </div>
             <div class="form-group">
@@ -212,15 +204,12 @@ include("engine.php");
                                 <option value="Province No. 5">Province No. 5</option>
                                 <option value="Karnali Pradesh">Karnali Pradesh</option>
                                 <option value="Sudurpaschim Pradesh">Sudurpaschim Pradesh</option>
-                                <option value="Maharastra">Maharastra</option>
-                                <option value="Karnataka">Karnataka</option>
               </select>
             </div>
             <div class="form-group">
               <label for="zone">Zone:</label>
               <select class="form-control" name="zone" required="required">
                                 <option value="">--Select Zone--</option>
-                                <option value="Bijapur">Bijapur</option>
                                 <option value="Bagmati">Bagmati</option>
                                 <option value="Bheri">Bheri</option>
                                 <option value="Dhawalagiri">Dhawalagiri</option>
@@ -235,7 +224,6 @@ include("engine.php");
                                 <option value="Rapti">Rapti</option>
                                 <option value="Sagarmatha">Sagarmatha</option>
                                 <option value="Seti">Seti</option>
-                                <option value="Bandra">Bandra</option>
                             </select>
             </div>
             <div class="form-group">
@@ -243,8 +231,6 @@ include("engine.php");
               <select class="form-control" name="district" required="required">
                                 %{--Mechi--}%
                                 <option value="">--Select District--</option>
-                                <option value="Vijayapur">Vijayapur</option>
-                                <option value="Mumbai">Mumbai</option>
                                 <option value="Taplejung">Taplejung</option>
                                 <option value="Panchthar">Panchthar</option>
                                 <option value="Ilam">Ilam</option>
@@ -619,8 +605,6 @@ include("engine.php");
               <select class="form-control" name="country" required="required">
                                 <option value="">--Select Country--</option>
                                 <option value="Nepal">Nepal</option>
-                                <option value="India">India</option>
-                                
               </select>
             </div>
             <div class="form-group">

@@ -1,65 +1,40 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
-
+session_start();
 include("navbar.php");
+?>
 
- ?>
- <style>
-body, html {
-  height: 100%;
-  margin: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RentHouse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white  text-gray-800">
 
-.bg {
-  /* The image used */
-  background-image: url("images/carousel.png");
+<!-- Hero Section with Background Image -->
+<div class="h-[75vh] bg-cover bg-bottom rounded-3xl mt-5 ml-2 mr-2 flex items-center justify-center" style="background-image: url('images/home2.png');">
+  <!-- You can add a title or tagline here if desired -->
+</div>
 
-  /* Full height */
-  height: 60%; 
-
-  /* Center and scale the image nicely */
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  text-align: left;
-  text-decoration: none;
-  margin: 5px 2px;
-}
-.fa:hover {
-    opacity: 0.7;
-}
-.fa-facebook {
-  background: #3B5998;
-  color: white;
-}
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-}
-.active-cyan-3 input[type=text] {
-  border: 1px solid #4dd0e1;
-  box-shadow: 0 0 0 1px #4dd0e1;
-}
-</style>
-
-<div class="bg"></div><br>
-<div class="container active-cyan-4 mb-4 inline">
-	<form method="POST" action="search-property.php">
-  <input class="form-control" type="text" placeholder="Enter location to search house." name="search_property" aria-label="Search">
+<!-- Search Section -->
+<div class="max-w-4xl mx-auto px-4 mt-8 ">
+  <form method="POST" action="search-property.php" class="w-full">
+    <input 
+      type="text" 
+      name="search_property" 
+      placeholder="Enter location to search house..." 
+      class="rounded-3xl w-full px-4 py-3 border border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 shadow-md transition duration-300"
+    />
   </form>
 </div>
-<br><br>
-<?php 
 
-include("property-list.php");
+<!-- Property Listing -->
+<div class="max-w-7xl mx-auto px-4 mt-12">
+  <?php include("property-list.php"); ?>
+</div>
 
- ?>
- <br><br>
+</body>
+</html>

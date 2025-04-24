@@ -1,128 +1,90 @@
 <?php 
-
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-
-if(!isset($_SESSION["email"])){
+if (!isset($_SESSION["email"])) {
   header("location:index.php");
 }
 include('navbar.php');
 include('tenant-engine.php');
- ?>
-<style>
-	.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-}
-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
+?>
 
-button:hover, a:hover {
-  opacity: 0.7;
-}
-
-.form-group {
-  text-align: left;
-}
-</style>
-
- <center><h3>Tenant Profile</h3></center>
-      <div class="container">
-      <?php 
-        include("config/config.php");
-        $u_email= $_SESSION["email"];
-
-        $sql="SELECT * from tenant where email='$u_email'";
-        $result=mysqli_query($db,$sql);
-
-        if(mysqli_num_rows($result)>0)
-      {
-          while($rows=mysqli_fetch_assoc($result)){
-          
-       ?>
-        <div class="card">
-  <img src="images/avatar.png" alt="John" style="height:200px; width: 100%">
-  <h1><?php echo $rows['full_name']; ?></h1>
-  <p class="title"><?php echo $rows['email']; ?></p>
-  <p><b>Phone No.: </b><?php echo $rows['phone_no']; ?></p>
-  <p><b>Address: </b><?php echo $rows['address']; ?></p>
-  <p><b>Id Type: </b><?php echo $rows['id_type']; ?></p>
-  <p><img src="<?php echo $rows['id_photo']; ?>" height="100px"></p>
-
-  <!-- Trigger the modal with a button -->
-  <p><button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">Update Profile</button></p>
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+<div class="min-h-screen bg-gray-100 p-6">
+  <h2 class="text-3xl font-semibold text-center mb-8 text-gray-800">Tenant Profile</h2>
+  <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 transition-all duration-500 ease-in-out hover:shadow-2xl">
+    <?php 
+      include("config/config.php");
+      $u_email= $_SESSION["email"];
+      $sql="SELECT * from tenant where email='$u_email'";
+      $result=mysqli_query($db,$sql);
+      if(mysqli_num_rows($result) > 0) {
+        while($rows = mysqli_fetch_assoc($result)) {
+    ?>
+    <img src="<?php echo $rows['id_photo']; ?>" alt="Avatar" class="w-full h-52 object-cover rounded-xl mb-4">
+    <h1 class="text-xl font-bold text-gray-800"><?php echo $rows['full_name']; ?></h1>
+    <p class="text-gray-500"><?php echo $rows['email']; ?></p>
+    <p class="mt-2 text-sm"><span class="font-semibold">Phone No.:</span> <?php echo $rows['phone_no']; ?></p>
+    <p class="text-sm"><span class="font-semibold">Address:</span> <?php echo $rows['address']; ?></p>
+    <p class="text-sm"><span class="font-semibold">ID Type:</span> <?php echo $rows['id_type']; ?></p>
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Update Profile</h4>
-        </div>
-        <div class="modal-body">
 
-            <form method="POST">
-                <div class="form-group">
-                  <label for="full_name">Full Name:</label>
-                  <input type="hidden" value="<?php echo $rows['tenant_id']; ?>" name="tenant_id">
-                  <input type="text" class="form-control" id="full_name" value="<?php echo $rows['full_name']; ?>" name="full_name">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email" value="<?php echo $rows['email']; ?>" name="email" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="phone_no">Phone No.:</label>
-                  <input type="text" class="form-control" id="phone_no" value="<?php echo $rows['phone_no']; ?>" name="phone_no">
-                </div>
-                <div class="form-group">
-                  <label for="address">Address:</label>
-                  <input type="text" class="form-control" id="address" value="<?php echo $rows['address']; ?>" name="address">
-                </div>
-                <div class="form-group">
-      <label for="id_type">Type of ID:</label>
-      <input type="text" class="form-control" value="<?php echo $rows['id_type']; ?>" name="id_type" readonly>
-    </div>
-    <div class="form-group">
-      <label>Your Id:</label><br>
-      <img src="<?php echo $rows['id_photo']; ?>" id="output_image"/ height="100px" readonly>
-    </div>
-                <hr>
-                <center><button id="submit" name="tenant_update" class="btn btn-primary btn-block">Update</button></center><br>
-                
-              </form>
+    <!-- Modal Trigger -->
+    <button onclick="document.getElementById('modal').classList.remove('hidden')" class="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all">
+      Update Profile
+    </button>
 
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 hidden transition-opacity">
+      <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-lg animate-fade-in">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Update Profile</h3>
+          <button onclick="document.getElementById('modal').classList.add('hidden')" class="text-gray-500 hover:text-red-600 text-2xl">&times;</button>
+        </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
+        <form method="POST">
+          <input type="hidden" value="<?php echo $rows['tenant_id']; ?>" name="tenant_id">
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Full Name:</label>
+            <input type="text" name="full_name" value="<?php echo $rows['full_name']; ?>" class="w-full border border-gray-300 rounded-lg p-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          </div>
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Email:</label>
+            <input type="email" name="email" value="<?php echo $rows['email']; ?>" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg p-2 mt-1">
+          </div>
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Phone No.:</label>
+            <input type="text" name="phone_no" value="<?php echo $rows['phone_no']; ?>" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+          </div>
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Address:</label>
+            <input type="text" name="address" value="<?php echo $rows['address']; ?>" class="w-full border border-gray-300 rounded-lg p-2 mt-1">
+          </div>
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Type of ID:</label>
+            <input type="text" value="<?php echo $rows['id_type']; ?>" readonly class="w-full bg-gray-100 border border-gray-300 rounded-lg p-2 mt-1">
+          </div>
+          <div class="mb-4">
+            <label class="block font-medium text-gray-700">Your ID:</label>
+            <img src="<?php echo $rows['id_photo']; ?>" class="h-24 rounded-lg object-cover mt-2 border">
+          </div>
+          <div class="text-center">
+            <button type="submit" name="tenant_update" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-all">
+              Update
+            </button>
+          </div>
+        </form>
       </div>
-      
     </div>
+    <?php }} ?>
   </div>
-  
-
-
-
-
 </div>
-<?php }} ?>
+
+<script>
+  // Optional: Close modal on outside click
+  window.onclick = function(event) {
+    const modal = document.getElementById('modal');
+    if (event.target === modal) {
+      modal.classList.add('hidden');
+    }
+  }
+</script>

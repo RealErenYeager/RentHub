@@ -1,31 +1,35 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
+session_start();
 if(isset($_SESSION["email"])){
   header("location:owner/owner-index.php");
 }
 
 include("navbar.php");
 include("owner-engine.php");
+?>
 
- ?>
-
-<div class="container">
-  <h3 style="font-weight: bold; text-align: center;">Owner Login</h3><hr><br><br>
-  <form method="POST">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
-    </div>
-    <div class="form-group">
-      <a href="forgot-password-owner.php">Lost your Password ? </a> 
-    </div>
-    <center><input type="submit" id="submit" name="owner_login" class="btn btn-primary btn-block" value="Login"></center>
-  </form>
+<!-- Tailwind Owner Login -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 px-4">
+  <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+    <h2 class="text-3xl font-extrabold text-center text-blue-700 mb-6">Owner Login</h2>
+    <form method="POST" class="space-y-5">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150">
+      </div>
+      <div>
+        <label for="pwd" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="pwd" name="password" placeholder="Enter your password" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150">
+      </div>
+      <div class="text-right text-sm">
+        <a href="forgot-password-owner.php" class="text-blue-600 hover:underline">Lost your Password?</a>
+      </div>
+      <button type="submit" name="owner_login"
+        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
+        Login
+      </button>
+    </form>
+  </div>
 </div>

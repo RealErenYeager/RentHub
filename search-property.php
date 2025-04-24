@@ -1,98 +1,56 @@
-<?php 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
-
-isset($_SESSION["email"]);
-include("navbar.php");
-
-
- ?>
-
- <?php 
-include("config/config.php");
- ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 100%;
-  min-width: 100%;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-  display: inline;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  opacity: 0.8;
-}
-
-.container {
-  padding: 2px 16px;
-}
-
-.btn {
-  width: 100%;
-}
-
-.image {
-  min-width: 100%;
-  min-height: 200px;
-  max-width: 100%;
-  max-height:200px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searched Properties</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<?php 
-$q_string = $_POST['search_property'];
-$sql="SELECT * FROM add_property where concat(zone,district,province,city,tole,property_type,country) like '%$q_string%'";
+<body class="bg-gray-50 font-sans">
+  <?php 
+    if (session_status() === PHP_SESSION_NONE) {
+      session_start();
+    }
+    include("navbar.php");
+    include("config/config.php");
+  ?>
+
+  <?php 
+    $q_string = $_POST['search_property'];
+    $sql="SELECT * FROM add_property WHERE CONCAT(zone,district,province,city,tole,property_type,country) LIKE '%$q_string%'";
     $query=mysqli_query($db,$sql);
-    echo '<center><h1>Searched Properties</h1></center>';
-    if(mysqli_num_rows($query)>0)
-    {
-      while ($rows=mysqli_fetch_assoc($query)) {
-        $property_id=$rows['property_id'];
+  ?>
 
-?>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Searched Properties</h1>
 
-<div class="col-sm-2">
-<div class="card">
-<?php
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <?php if(mysqli_num_rows($query) > 0): ?>
+        <?php while ($rows = mysqli_fetch_assoc($query)): ?>
+          <?php 
+            $property_id = $rows['property_id'];
+            $sql2 = "SELECT * FROM property_photo WHERE property_id='$property_id'";
+            $query2 = mysqli_query($db, $sql2);
+            $photo = "placeholder.jpg";
+            if(mysqli_num_rows($query2) > 0) {
+              $row = mysqli_fetch_assoc($query2);
+              $photo = $row['p_photo'];
+            }
+          ?>
 
-
-        $sql2="SELECT * FROM property_photo where property_id='$property_id'";
-    $query2=mysqli_query($db,$sql2);
-
-    if(mysqli_num_rows($query2)>0)
-    {
-      $row=mysqli_fetch_assoc($query2); 
-        $photo=$row['p_photo'];
-        echo  '<img class="image" src="owner/'.$photo.'">'; }?>
-
-  <h4><b><?php echo $rows['property_type']; ?></b></h4> 
-  <p><?php echo $rows['city'].', '.$rows['district'] ?></p> 
-  <p><?php echo '<a href="view-property.php?property_id='.$rows['property_id'].'"  class="btn btn-lg btn-primary btn-block" >View Property </a><br>'; ?></p><br>
-</div>
-</div>
-
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <img src="owner/<?php echo $photo; ?>" alt="Property Photo" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-semibold text-gray-800 mb-1"><?php echo $rows['property_type']; ?></h2>
+              <p class="text-gray-600 mb-2"><?php echo $rows['city'] . ', ' . $rows['district']; ?></p>
+              <a href="view-property.php?property_id=<?php echo $property_id; ?>" class="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition duration-200">View Property</a>
+            </div>
+          </div>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <p class="col-span-full text-center text-red-500 text-lg">Searched Property not found...</p>
+      <?php endif; ?>
+    </div>
+  </div>
 </body>
-</html> 
-
-
-<?php 
-
-}
-    }
-
-    else{
-    	echo "<center><h3>Searched Property not found...</h3></center>";
-    }
-    ?>
+</html>

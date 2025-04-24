@@ -1,83 +1,53 @@
 <?php 
 include("config/config.php");
- ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 100%;
-  min-width: 100%;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-  display: inline;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  opacity: 0.8;
-}
-
-.container {
-  padding: 2px 16px;
-}
-
-.btn {
-  width: 100%;
-}
-
-.image {
-  min-width: 100%;
-  min-height: 200px;
-  max-width: 100%;
-  max-height:200px;
-}
-</style>
-</head>
-<body>
-<?php 
-
-$sql="SELECT * FROM add_property";
-    $query=mysqli_query($db,$sql);
-
-    if(mysqli_num_rows($query)>0)
-    {
-      while ($rows=mysqli_fetch_assoc($query)) {
-        $property_id=$rows['property_id'];
-
 ?>
 
-<div class="col-sm-2">
-<div class="card">
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Properties | RentHouse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
 
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold mb-6 text-center">Available Properties</h2>
 
-        $sql2="SELECT * FROM property_photo where property_id='$property_id'";
-    $query2=mysqli_query($db,$sql2);
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <?php 
+    $sql = "SELECT * FROM add_property";
+    $query = mysqli_query($db, $sql);
 
-    if(mysqli_num_rows($query2)>0)
-    {
-      $row=mysqli_fetch_assoc($query2); 
-        $photo=$row['p_photo'];
-        echo  '<img class="image" src="owner/'.$photo.'">'; }?>
+    if (mysqli_num_rows($query) > 0) {
+      while ($rows = mysqli_fetch_assoc($query)) {
+        $property_id = $rows['property_id'];
+        $photo = 'default.jpg';
 
-  <h4><b><?php echo $rows['property_type']; ?></b></h4> 
-  <p><?php echo $rows['city'].', '.$rows['district'] ?></p> 
-  <p><?php echo '<a href="view-property.php?property_id='.$rows['property_id'].'"  class="btn btn-lg btn-primary btn-block" >View Property </a><br>'; ?></p><br>
-</div>
+        $sql2 = "SELECT * FROM property_photo WHERE property_id='$property_id'";
+        $query2 = mysqli_query($db, $sql2);
+        if (mysqli_num_rows($query2) > 0) {
+          $row = mysqli_fetch_assoc($query2); 
+          $photo = $row['p_photo'];
+        }
+    ?>
+    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      <img src="<?php echo 'owner/'.$photo; ?>" alt="Property Image" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold mb-1"><?php echo $rows['property_type']; ?></h3>
+        <p class="text-gray-600 mb-3"><?php echo $rows['city'].', '.$rows['district']; ?></p>
+        <a href="view-property.php?property_id=<?php echo $property_id; ?>" class="inline-block w-full bg-blue-500 hover:bg-blue-600 text-white text-center py-2 px-4 rounded-md transition duration-200">View Property</a>
+      </div>
+    </div>
+    <?php 
+      }
+    } else {
+      echo '<p class="col-span-full text-center text-gray-600">No properties found.</p>';
+    }
+    ?>
+  </div>
 </div>
 
 </body>
-</html> 
-
-
-<?php 
-
-}
-    }
-    ?>
+</html>
