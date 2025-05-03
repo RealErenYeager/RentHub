@@ -8,7 +8,8 @@ include("navbar.php");
 <head>
   <meta charset="UTF-8">
   <title>RentHub</title>
-  <link rel="icon" type="image/png" href="images/logo5.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+
 
 
 
