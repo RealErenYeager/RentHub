@@ -7,7 +7,9 @@ include("navbar.php");
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>RentHouse</title>
+  <title>RentHub</title>
+  <link rel="icon" href="images/logo4.ico" type="image/x-icon">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>

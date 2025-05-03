@@ -27,10 +27,10 @@
       
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="index.php">
-          <img class="h-12 transition transform hover:scale-105 duration-300" src="images/logo.png" alt="logo">
-        </a>
-      </div>
+  <a href="index.php" class="flex items-center space-x-2 transition-transform hover:scale-105 duration-300">
+    <img class="h-11" src="images/logo1.png" alt="logo">
+  </a>
+</div>
 
       <!-- Hamburger Button (Mobile) -->
       <div class="md:hidden flex items-center">
