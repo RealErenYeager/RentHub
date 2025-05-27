@@ -45,8 +45,7 @@
         <!-- Menu Items -->
         <div id="menu" class="hidden md:flex md:items-center md:space-x-6">
           <a href="index.php" class="text-gray-700 hover:text-primary font-medium transition duration-300">Home</a>
-          <a href="#" class="text-gray-700 hover:text-primary font-medium transition duration-300">About Us</a>
-          <a href="#" class="text-gray-700 hover:text-primary font-medium transition duration-300">Contact Us</a>
+          
         </div>
 
         <!-- Right Side -->
